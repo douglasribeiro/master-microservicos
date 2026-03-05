@@ -1,0 +1,12 @@
+services:
+  naming-server:
+    image: 01douglas/naming-server:0.0.1=SNAPSHOT
+    ports:
+      - 8761:8761
+    networks:
+      - erudio-network
+  
+networks:
+  erudio-network:
+    name: erudio-network
+    driver: bridge

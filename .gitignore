@@ -1,0 +1,30 @@
+# Arquivos de build
+target/
+build/
+out/
+
+# Configurações locais
+*.iml
+*.class
+*.log
+*.tmp
+
+# IDEs
+.vscode/
+.idea/
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Dependências
+node_modules/
+
+# Arquivos compactados e backups
+*.zip
+*.tar
+*.gz
+*.rar
+
+# Arquivos de ambiente
+.env

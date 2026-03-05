@@ -1,0 +1,24 @@
+1 - Criação do Jar
+mvn clean package
+
+2 - Exemplo Dockerfile
+
+FROM eclipse-temurin:21-jdk
+COPY target/*.jar app.jar
+ENTRYPOINT ["java", "-jar", "/app.jar"]
+
+docker build -t exchange-service:0.0.1-SNAPSHOT .
+
+docker run -p 8000:8000 -d exchange-service:0.0.1-SNAPSHOT
+
+docker tag exchange-service:0.0.1-SNAPSHOT 01douglas/exchange-service:0.0.1-SNAPSHOT
+
+docker login docker.io
+
+docker push 01douglas/exchange-service:0.0.1-SNAPSHOT
+
+docker run -p 8101:8101 -d 01douglas/exchange-service:0.0.1-SNAPSHOT
+
+docker tag 01douglas/exchange-service:0.0.1-SNAPSHOT 01douglas/exchange-service:latest
+
+docker push 01douglas/exchange-service:latest

@@ -1,0 +1,21 @@
+services:
+  naming-server:
+    image: 01douglas/naming-server:0.0.1-SNAPSHOT
+    ports:
+      - 8761:8761
+    restart: always
+    networks:
+      - erudio-network
+	  
+  zipking-server:
+    image: openzipkin/zipkin:3.5.1
+    ports:
+      - 9411:9411
+    restart: always
+    networks:
+      - erudio-network
+  
+networks:
+  erudio-network:
+    name: erudio-network
+    driver: bridge

@@ -1,0 +1,66 @@
+services:
+  zipking-server:
+    image: openzipkin/zipkin:3.5.1
+    ports:
+      - 9411:9411
+    restart: always
+    networks:
+      - erudio-network
+  
+  book-db:
+    image: mysql:9.3.0
+    restart: always
+    environment:
+      TZ: America/Sao_Paulo
+      MYSQL_ROOT_PASSWORD: admin123
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: admin123
+      MYSQL_DATABASE: book_service 
+    ports:
+      - 3310:3306
+    networks:
+      - erudio-network
+
+  exchange-db:
+    image: mysql:9.3.0
+    restart: always
+    environment:
+      TZ: America/Sao_Paulo
+      MYSQL_ROOT_PASSWORD: admin123
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: admin123
+      MYSQL_DATABASE: exchange_service 
+    ports:
+      - 3308:336
+    networks:
+      - erudio-network	  
+	  
+  naming-server:
+    image: 01douglas/naming-server:0.0.1-SNAPSHOT
+    ports:
+      - 8761:8761
+    restart: always
+    depends_on:
+      - zipking-server
+    networks: 
+      - erudio-network
+
+# mvn spring-boot:build-image	  
+  api-gateway:
+    image: 01douglas/api-gateway:0.0.1-SNAPSHOT
+    ports:
+      - 8765:8765
+    restart: always
+    depends_on:
+      - zipking-server
+      - naming-server
+    environment:
+      SPRING_ZIPIKING_BASEURL: http://zipking-server:9411
+      EUREKA_CLIENT_SERVICEURL_DEFULTZONE: http://naming-server:8761/eureka
+    networks:
+      - erudio-network
+
+networks:
+  erudio-network:
+    name: erudio-network
+    driver: bridge

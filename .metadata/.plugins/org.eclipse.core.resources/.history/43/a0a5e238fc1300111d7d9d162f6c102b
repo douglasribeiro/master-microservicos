@@ -1,0 +1,15 @@
+server:
+  port: 8761
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: naming-server
+  managament:
+    tracing:
+      sampling:
+        probability: 1.0
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false

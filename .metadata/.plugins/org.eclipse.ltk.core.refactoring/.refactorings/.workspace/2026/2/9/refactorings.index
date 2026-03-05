@@ -1,0 +1,5 @@
+1771865245271	Delete resource 'greeting-service'
+1771865473881	Delete resource 'greeting-service/src/main/resources/static'
+1771865514232	Delete resource 'greeting-service/src/test/java/com/example/developer/GreetingServiceApplicationTests.java'
+1771866015855	Delete resource 'greeting-service'
+1771933975969	Delete resource 'exchange-service/src/test/java/com/br/developer/ExchangeServiceApplicationTests.java'

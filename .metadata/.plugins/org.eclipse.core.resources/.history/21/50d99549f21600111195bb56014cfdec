@@ -1,0 +1,37 @@
+services:
+#  zipking-server:
+#    image: openzipkin/zipkin:3.5.1
+#    ports:
+#      - 9411:9411
+#    restart: always
+#    networks:
+#      - erudio-network
+  
+  naming-server:
+    image: 01douglas/naming-server:0.0.1-SNAPSHOT
+    ports:
+      - 8761:8761
+    restart: always
+    depends_on:
+      - zipking-server
+    networks: 
+      - erudio-network
+
+ # api-gateway:
+ #   image: 01douglas/api-gateway:0.0.1-SNAPSHOT
+ #   ports:
+ #     - 8765:8765
+ #   restart: always
+ #   depends_on:
+ #     - zipking-server
+ #     - naming-server
+ #   environment:
+ #     SPRING_ZIPIKING_BASEURL: http://localhost:9411
+ #     EUREKA_CLIENT_SERVICEURL_DEFULTZONE: http://localhost:8761/eureka
+ #   networks:
+ #     - erudio-network
+
+networks:
+  erudio-network:
+    name: erudio-network
+    driver: bridge

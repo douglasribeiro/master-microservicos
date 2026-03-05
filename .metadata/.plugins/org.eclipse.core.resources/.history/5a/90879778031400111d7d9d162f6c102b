@@ -1,0 +1,6 @@
+services:
+  
+networks:
+  erudio-network:
+    name: erudio-network
+    driver: bridge
