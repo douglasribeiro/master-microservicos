@@ -147,7 +147,6 @@ INDEX VERSION 1.134+D:\workspace\curso-microservicos\.metadata\.plugins\org.ecli
 442956958.index
 1789336887.index
 418612769.index
-3219072002.index
 3670834033.index
 2073097199.index
 1946474910.index

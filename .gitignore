@@ -28,3 +28,4 @@ node_modules/
 
 # Arquivos de ambiente
 .env
+/.metadata/
