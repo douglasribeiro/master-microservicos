@@ -25,5 +25,21 @@ jobs:
 
     - name: Bulid Eureka Naming Server Docker Image
       working-directory: ./naming-server
-      run: mvn spring-boot:build-image -DskipTests
+      run: mvn spring-boot:build-image
+
+    - name: Bulid API Geateway Docker Image
+      working-directory: ./api-gateway
+      run: mvn spring-boot:build-image
+
+    - name: Bulid Exchange Microservices Docker Image
+      working-directory: ./exchange-service
+      run: mvn clean package
+
+    - name: Bulid Book Microservices Docker Image
+      working-directory: ./book-service
+      run: mvn clean package
+
+    - name: Docker Compose Build
+      working-directory: ./naming-server
+      run: docker compose build
     
