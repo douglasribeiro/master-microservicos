@@ -13,6 +13,7 @@ public class ZipkinCustomSenderConfig {
 	@Value("${spring.zipkin.base-url:http://localhost:9411}")
 	private String zipkinBaseUrl;
 	
+	@SuppressWarnings("deprecation")
 	@Bean
     public Sender zipkinSender() {
         String endpoint = zipkinBaseUrl + "/api/v2/spans";
