@@ -1,4 +1,4 @@
-package com.br.developer.controller;
+	package com.br.developer.controller;
 
 import java.math.BigDecimal;
 
@@ -51,12 +51,15 @@ public class ExchangeController {
 		
 		Exchange exchange = repository.findByFromAndTo(from, to);
 		
+		String port = informationService.retriveServerPort();
+		String host = informationService.retriveServerPort();
+		
 		if(exchange == null) throw new RuntimeException("Currency Unsuported.");
 		
 		BigDecimal conversionFactor = exchange.getConversionFactor();
 		BigDecimal convertedValue = conversionFactor.multiply(amount);
 		exchange.setConvertedValue(convertedValue);
-		exchange.setEnvironment("PORT " + informationService.retriveServerPort());
+		exchange.setEnvironment("PORT " + port);
 		return exchange;
 	}
 }

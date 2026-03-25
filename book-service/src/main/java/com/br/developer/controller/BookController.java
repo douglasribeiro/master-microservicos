@@ -1,5 +1,7 @@
 package com.br.developer.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class BookController {
 
+	private Logger logger = LoggerFactory.getLogger(BookController.class);
 	private final InstanceInformationService informationService;
 	private final BookRepository repository; 
 	private final ExchangeProxy proxy;
@@ -33,11 +36,13 @@ public class BookController {
 		@PathVariable("currency") String currency) 
 	{
 		String port = informationService.retriveServerPort(); 
+		String host = informationService.retriveInstanceInfo();
 		Book book = repository.findById(id).orElseThrow();
-		
+		logger.info("Calculating the converted pric of the book from {} ESD to {}", book.getPrice(), currency);
 		Exchange exchange = proxy.getExchange(book.getPrice(), "USD", currency);
 		
-		book.setEnvironment("Book por " + port + " Exchange port" + exchange.getEnvironment()); 
+		book.setEnvironment("BOOK HOST: " + host + " PORT: " + port + " VERSION: kube_v1"
+				+ " EXCHANGE HOST: " + exchange.getEnvironment()); 
 		book.setCurrency(currency);
 		book.setPrice(exchange.getConvertedValue()); 
 		return book;

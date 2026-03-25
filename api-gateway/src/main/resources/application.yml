@@ -29,10 +29,16 @@ spring:
               uri: lb://exchange-service
               predicates:
               - Path=/exchange-service/**
+            - id: endereco-service
+              uri: lb://endereco-service
+              predicates:
+              - Path=/endereco-service/**
 springdoc:
   swagger-ui:
     urls:
     - name: book-service
       url: /book-service/v3/api-docs
     - name: exchange-service
-      url: /exchange-service/v3/api-docs					
+      url: /exchange-service/v3/api-docs
+    - name: endereco-service
+      url: /endereco-service/v3/api-docs

@@ -1,9 +1,19 @@
 server:
   port: 8000
-eureka:
-  client:
-    service-url:
-      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFULTZONE:http://localhost:8761/eureka}
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  health:
+    livenessState:
+      enabled: true
+    readinessState:
+      enabled: true
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFULTZONE:http://localhost:8761/eureka}
 spring:
   main:
     allow-bean-definition-overriding: true
@@ -16,7 +26,7 @@ spring:
     password: admin123
   jpa:
      hibernate: 
-      ddl-auto: none
+      ddl-auto: update
      properties:
       hibernate:
       show-sql: true
@@ -25,8 +35,8 @@ spring:
     tracing:
       sampling:
         probability: 1.0
-  zikin:
-    base-url: ${SPRING_ZIPKIN_BASEURL:http://localhost:9411}			
+#  zikin:
+#    base-url: ${SPRING_ZIPKIN_BASEURL:http://localhost:9411}			
 springdoc:
   api-docs: 
     path: /exchange-service/v3/api-docs
